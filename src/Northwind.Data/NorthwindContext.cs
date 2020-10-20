@@ -15,7 +15,7 @@ namespace Northwind.Data
         }
 
         public virtual DbSet<AlphabeticalListOfProducts> AlphabeticalListOfProducts { get; set; }
-        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CategorySalesFor1997> CategorySalesFor1997 { get; set; }
         public virtual DbSet<CurrentProductList> CurrentProductList { get; set; }
         public virtual DbSet<CustomerAndSuppliersByCity> CustomerAndSuppliersByCity { get; set; }
@@ -31,7 +31,7 @@ namespace Northwind.Data
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<OrdersQry> OrdersQry { get; set; }
         public virtual DbSet<ProductSalesFor1997> ProductSalesFor1997 { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductsAboveAveragePrice> ProductsAboveAveragePrice { get; set; }
         public virtual DbSet<ProductsByCategory> ProductsByCategory { get; set; }
         public virtual DbSet<QuarterlyOrders> QuarterlyOrders { get; set; }
@@ -71,7 +71,7 @@ namespace Northwind.Data
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
 
-            modelBuilder.Entity<Categories>(entity =>
+            modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasKey(e => e.CategoryId);
 
@@ -566,7 +566,7 @@ namespace Northwind.Data
                 entity.Property(e => e.ProductSales).HasColumnType("money");
             });
 
-            modelBuilder.Entity<Products>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.ProductId);
 

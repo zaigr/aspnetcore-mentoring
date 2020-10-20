@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Northwind.Domain.Models
 {
-    public partial class Categories
+    public class Category
     {
-        public Categories()
+        public Category()
         {
-            Products = new HashSet<Products>();
+            Products = new HashSet<Product>();
         }
 
         public int CategoryId { get; set; }
@@ -15,6 +15,6 @@ namespace Northwind.Domain.Models
         public string Description { get; set; }
         public byte[] Picture { get; set; }
 
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

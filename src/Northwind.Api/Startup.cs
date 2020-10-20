@@ -1,9 +1,13 @@
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Northwind.Api.Mapping;
+using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Data;
 
 namespace Northwind.Api
@@ -25,6 +29,10 @@ namespace Northwind.Api
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("Northwind"));
             });
+
+            services.AddMediatR(typeof(GetAllCategoriesQuery).Assembly);
+
+            services.AddAutoMapper(typeof(MapperProfile).Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,8 +49,6 @@ namespace Northwind.Api
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
