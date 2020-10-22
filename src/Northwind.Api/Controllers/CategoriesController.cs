@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Api.Models.Categories;
 using Northwind.Api.ViewModels;
+using Northwind.Api.ViewModels.Categories;
 using Northwind.Core.UseCases.Categories.GetAll;
 
 namespace Northwind.Api.Controllers
@@ -21,6 +22,7 @@ namespace Northwind.Api.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var query = new GetAllCategoriesQuery();

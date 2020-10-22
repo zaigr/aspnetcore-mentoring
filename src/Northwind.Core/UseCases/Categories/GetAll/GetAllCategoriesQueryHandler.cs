@@ -19,7 +19,7 @@ namespace Northwind.Core.UseCases.Categories.GetAll
 
         public async Task<IList<Category>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Categories.ToListAsync(cancellationToken);
+            return await _context.Categories.AsNoTracking().ToListAsync(cancellationToken);
         }
     }
 }

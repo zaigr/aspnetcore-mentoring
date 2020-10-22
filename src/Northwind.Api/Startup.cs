@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Northwind.Api.Mapping;
 using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Data;
@@ -23,6 +24,13 @@ namespace Northwind.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(opt =>
+            {
+                opt
+                    .AddConsole()
+                    .AddDebug();
+            });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<NorthwindContext>(opt =>

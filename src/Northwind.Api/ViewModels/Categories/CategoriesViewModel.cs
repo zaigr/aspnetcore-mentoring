@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Northwind.Api.Models.Categories;
 
-namespace Northwind.Api.ViewModels
+namespace Northwind.Api.ViewModels.Categories
 {
     public class CategoriesViewModel
     {

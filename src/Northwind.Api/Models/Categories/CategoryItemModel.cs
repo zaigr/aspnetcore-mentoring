@@ -1,7 +1,10 @@
-﻿namespace Northwind.Api.Models.Categories
+﻿using System.ComponentModel;
+
+namespace Northwind.Api.Models.Categories
 {
     public class CategoryItemModel
     {
+        [DisplayName("Id")]
         public int CategoryId { get; set; }
 
         public string Name { get; set; }

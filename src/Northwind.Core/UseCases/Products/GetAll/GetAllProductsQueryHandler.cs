@@ -21,6 +21,7 @@ namespace Northwind.Core.UseCases.Products.GetAll
         public async Task<IList<Product>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var query = _context.Products
+                .AsNoTracking()
                 .Include(p => p.Supplier)
                 .Include(p => p.Category)
                 .AsQueryable();
