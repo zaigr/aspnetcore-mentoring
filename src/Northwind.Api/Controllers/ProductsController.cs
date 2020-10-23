@@ -9,9 +9,11 @@ using Northwind.Api.Models.Products;
 using Northwind.Api.ViewModels;
 using Northwind.Api.ViewModels.Products;
 using Northwind.Core.UseCases.Categories.GetAll;
+using Northwind.Core.UseCases.Products.Create;
 using Northwind.Core.UseCases.Products.GetAll;
 using Northwind.Core.UseCases.Products.GetSingle;
 using Northwind.Core.UseCases.Products.Update;
+using Northwind.Core.UseCases.Suppliers.GetAll;
 using Northwind.Domain.Models;
 
 namespace Northwind.Api.Controllers
@@ -86,6 +88,40 @@ namespace Northwind.Api.Controllers
             }
 
             var command = _mapper.Map<UpdateProductCommand>(viewModel.EditModel);
+            await _mediator.Send(command);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var categories = await _mediator.Send(new GetAllCategoriesQuery());
+            var categorySelectList = new SelectList(categories, nameof(Category.CategoryId), nameof(Category.CategoryName));
+
+            var suppliers = await _mediator.Send(new GetAllSuppliersQuery());
+            var suppliersSelectList = new SelectList(suppliers, nameof(Supplier.SupplierId), nameof(Supplier.CompanyName));
+
+            var viewModel = new CreateProductViewModel
+            {
+                Categories = categorySelectList,
+                Suppliers = suppliersSelectList,
+                CreateModel = new ProductCreateModel(),
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateProductViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var command = _mapper.Map<CreateProductCommand>(viewModel.CreateModel);
+
             await _mediator.Send(command);
 
             return RedirectToAction(nameof(Index));

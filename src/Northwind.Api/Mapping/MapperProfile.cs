@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Northwind.Api.Models.Categories;
 using Northwind.Api.Models.Products;
+using Northwind.Core.UseCases.Products.Create;
 using Northwind.Core.UseCases.Products.Update;
 using Northwind.Domain.Models;
 
@@ -21,6 +22,7 @@ namespace Northwind.Api.Mapping
             CreateMap<Product, ProductEditModel>();
 
             CreateMap<ProductEditModel, UpdateProductCommand>();
+            CreateMap<ProductCreateModel, CreateProductCommand>();
         }
     }
 }

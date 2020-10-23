@@ -41,7 +41,7 @@ namespace Northwind.Data
         public virtual DbSet<Shippers> Shippers { get; set; }
         public virtual DbSet<SummaryOfSalesByQuarter> SummaryOfSalesByQuarter { get; set; }
         public virtual DbSet<SummaryOfSalesByYear> SummaryOfSalesByYear { get; set; }
-        public virtual DbSet<Suppliers> Suppliers { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -750,7 +750,7 @@ namespace Northwind.Data
                 entity.Property(e => e.Subtotal).HasColumnType("money");
             });
 
-            modelBuilder.Entity<Suppliers>(entity =>
+            modelBuilder.Entity<Supplier>(entity =>
             {
                 entity.HasKey(e => e.SupplierId);
 

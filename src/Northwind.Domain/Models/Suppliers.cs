@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Northwind.Domain.Models
 {
-    public partial class Suppliers
+    public partial class Supplier
     {
-        public Suppliers()
+        public Supplier()
         {
             Products = new HashSet<Product>();
         }
