@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Data;
+using Northwind.Web.Configuration;
 using Northwind.Web.Mapping;
 using Serilog;
 
@@ -43,16 +44,24 @@ namespace Northwind.Web
             services.AddMediatR(typeof(GetAllCategoriesQuery).Assembly);
 
             services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+            services.Decorate<IConfiguration, ConfigurationLogger>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
+            logger.LogInformation("Middleware configuration started.");
+
             if (env.IsDevelopment())
             {
+                logger.LogInformation("In Development.");
+
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                logger.LogInformation("Not Development.");
+
                 app.UseExceptionHandler("/Home/Error");
             }
 
@@ -66,6 +75,8 @@ namespace Northwind.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            logger.LogInformation("Middleware configuration finished.");
         }
     }
 }
