@@ -1,0 +1,66 @@
+﻿@model Northwind.Web.ViewModels.Products.EditProductViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>@Model.ProductId - @Model.ProductName</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EditModel.ProductId" />
+            <div class="form-group">
+                <label asp-for="EditModel.ProductName"></label>
+                <input asp-for="EditModel.ProductName" class="form-control" />
+                <span asp-validation-for="EditModel.ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditModel.CategoryId"></label>
+                <select asp-for="EditModel.CategoryId" class="form-control" asp-items="@Model.Categories"></select>
+                <span asp-validation-for="EditModel.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditModel.UnitPrice"></label>
+                <input asp-for="EditModel.UnitPrice" class="form-control" value="@Model.EditModel.UnitPrice" />
+                <span asp-validation-for="EditModel.UnitPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditModel.UnitsInStock"></label>
+                <input asp-for="EditModel.UnitsInStock" class="form-control" value="@Model.EditModel.UnitsInStock" />
+                <span asp-validation-for="EditModel.UnitsInStock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditModel.UnitsInOrder"></label>
+                <input asp-for="EditModel.UnitsInOrder" class="form-control" value="@Model.EditModel.UnitsInOrder" />
+                <span asp-validation-for="EditModel.UnitsInOrder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditModel.ReorderLevel"></label>
+                <input asp-for="EditModel.ReorderLevel" class="form-control" value="@Model.EditModel.ReorderLevel" />
+                <span asp-validation-for="EditModel.ReorderLevel" class="text-danger"></span>
+            </div>
+            <hr />
+            <div class="form-group">
+                <label asp-for="EditModel.Discontinued"></label>
+                <input asp-for="EditModel.Discontinued" class="custom-checkbox" />
+                <span asp-validation-for="EditModel.Discontinued" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

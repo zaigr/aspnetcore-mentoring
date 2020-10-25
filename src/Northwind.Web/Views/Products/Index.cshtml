@@ -1,0 +1,88 @@
+﻿@model Northwind.Web.ViewModels.ProductsViewModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products table</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-dark">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].SupplierName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].QuantityPerUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].UnitsInStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].UnitsInOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].RecorderLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductItemModels[0].Discontinued)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ProductItemModels)
+        {
+            <tr>
+                <td>
+                    @item.ProductId
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.SupplierName
+                </td>
+                <td>
+                    @item.CategoryName
+                </td>
+                <td>
+                    @item.QuantityPerUnit
+                </td>
+                <td>
+                    @item.UnitPrice
+                </td>
+                <td>
+                    @item.UnitsInStock
+                </td>
+                <td>
+                    @item.UnitsInOrder
+                </td>
+                <td>
+                    @item.RecorderLevel
+                </td>
+                <td>
+                    @item.Discontinued
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-link">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
