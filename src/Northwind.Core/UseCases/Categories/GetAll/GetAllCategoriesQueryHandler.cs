@@ -19,6 +19,8 @@ namespace Northwind.Core.UseCases.Categories.GetAll
 
         public async Task<IList<Category>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
+            // throw new ApplicationException("Things are bad.");
+
             return await _context.Categories.AsNoTracking().ToListAsync(cancellationToken);
         }
     }
