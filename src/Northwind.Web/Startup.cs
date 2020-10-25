@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Data;
 using Northwind.Web.Mapping;
+using Serilog;
 
 namespace Northwind.Web
 {
@@ -24,12 +25,13 @@ namespace Northwind.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging(opt =>
-            {
-                opt
-                    .AddConsole()
-                    .AddDebug();
-            });
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File(
+                    "Northwind.Web.log",
+                    fileSizeLimitBytes: 5242880,
+                    retainedFileCountLimit: 15,
+                    rollOnFileSizeLimit: true)
+                .CreateLogger();
 
             services.AddControllersWithViews();
 
