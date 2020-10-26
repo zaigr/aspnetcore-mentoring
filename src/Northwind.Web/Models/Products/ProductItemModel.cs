@@ -9,10 +9,10 @@ namespace Northwind.Web.Models.Products
 
         public string Name { get; set; }
 
-        [DisplayName("Supplier Name")]
+        [DisplayName("Supplier")]
         public string SupplierName { get; set; }
 
-        [DisplayName("Category Name")]
+        [DisplayName("Category")]
         public string CategoryName { get; set; }
 
         [DisplayName("Quantity per Unit")]
@@ -27,7 +27,7 @@ namespace Northwind.Web.Models.Products
         [DisplayName("Units in Order")]
         public int UnitsInOrder { get; set; }
 
-        [DisplayName("Recorder Lever")]
+        [DisplayName("Recorder lvl")]
         public int RecorderLevel { get; set; }
 
         public bool Discontinued { get; set; }

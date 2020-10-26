@@ -4,7 +4,7 @@
     ViewData["Title"] = "Products";
 }
 
-<h1>Products table</h1>
+<h1>Products</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-dark">Create New</a>
@@ -12,35 +12,35 @@
 
 <table class="table">
     <thead>
-        <tr>
+        <tr class="d-flex">
             <th>
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].ProductId)
             </th>
-            <th>
+            <th class="col-sm-1">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].Name)
             </th>
-            <th>
+            <th class="col-sm-1">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].SupplierName)
             </th>
-            <th>
+            <th class="col-sm-1">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].CategoryName)
             </th>
-            <th>
+            <th class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].QuantityPerUnit)
             </th>
-            <th>
+            <th class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].UnitPrice)
             </th>
-            <th>
+            <th class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].UnitsInStock)
             </th>
-            <th>
+            <th class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].UnitsInOrder)
             </th>
-            <th>
+            <th class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].RecorderLevel)
             </th>
-            <th>
+            <th class="col-sm-1">
                 @Html.DisplayNameFor(model => model.ProductItemModels[0].Discontinued)
             </th>
         </tr>
@@ -48,35 +48,35 @@
     <tbody>
         @foreach (var item in Model.ProductItemModels)
         {
-            <tr>
+            <tr class="d-flex">
                 <td>
                     @item.ProductId
                 </td>
-                <td>
+                <td class="col-sm-1">
                     @item.Name
                 </td>
-                <td>
+                <td class="col-sm-1">
                     @item.SupplierName
                 </td>
-                <td>
+                <td class="col-sm-1">
                     @item.CategoryName
                 </td>
-                <td>
+                <td class="col-sm-2">
                     @item.QuantityPerUnit
                 </td>
-                <td>
+                <td class="col-sm-2">
                     @item.UnitPrice
                 </td>
-                <td>
+                <td class="col-sm-2">
                     @item.UnitsInStock
                 </td>
-                <td>
+                <td class="col-sm-2">
                     @item.UnitsInOrder
                 </td>
-                <td>
+                <td class="col-sm-2">
                     @item.RecorderLevel
                 </td>
-                <td>
+                <td class="col-sm-1">
                     @item.Discontinued
                 </td>
                 <td>
