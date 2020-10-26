@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Core.UseCases.Products.Create;
 using Northwind.Core.UseCases.Products.GetAll;
@@ -11,6 +11,7 @@ using Northwind.Core.UseCases.Products.GetSingle;
 using Northwind.Core.UseCases.Products.Update;
 using Northwind.Core.UseCases.Suppliers.GetAll;
 using Northwind.Domain.Models;
+using Northwind.Web.Configuration;
 using Northwind.Web.Extensions;
 using Northwind.Web.Models.Products;
 using Northwind.Web.ViewModels.Products;
@@ -25,12 +26,12 @@ namespace Northwind.Web.Controllers
 
         private readonly int? _defaultTablePageSize;
 
-        public ProductsController(IMediator mediator, IMapper mapper, IConfiguration configuration)
+        public ProductsController(IMediator mediator, IMapper mapper, IOptions<ProductsOptions> productsOptions)
         {
             _mediator = mediator;
             _mapper = mapper;
 
-            _defaultTablePageSize = configuration.GetValue<int?>("Products:DefaultPageSize");
+            _defaultTablePageSize = productsOptions.Value?.DefaultPageSize;
         }
 
         [HttpGet]

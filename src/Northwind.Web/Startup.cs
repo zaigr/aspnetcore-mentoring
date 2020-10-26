@@ -45,6 +45,8 @@ namespace Northwind.Web
 
             services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
+            services.Configure<ProductsOptions>(Configuration.GetSection(ProductsOptions.Products));
+
             services.Decorate<IConfiguration, ConfigurationLogger>();
         }
 
