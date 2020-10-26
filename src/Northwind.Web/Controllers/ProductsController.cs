@@ -35,11 +35,11 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? top)
         {
             var query = new GetAllProductsQuery
             {
-                Top = _defaultTablePageSize != 0 ? _defaultTablePageSize : null,
+                Top = top ?? _defaultTablePageSize,
             };
             var products = await _mediator.Send(query);
 
