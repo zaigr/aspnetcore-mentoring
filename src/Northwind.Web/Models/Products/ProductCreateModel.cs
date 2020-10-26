@@ -16,6 +16,7 @@ namespace Northwind.Web.Models.Products
         [MaxLength(20)]
         public string QuantityPerUnit { get; set; }
 
+        [Required]
         [Range(0, 999)]
         public decimal? UnitPrice { get; set; }
 

@@ -19,13 +19,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreateModel.SupplierId"></label>
-                <select asp-for="CreateModel.SupplierId" class="form-control" asp-items="@Model.Suppliers"></select>
-                <span asp-validation-for="CreateModel.SupplierId"></span>
+                <select asp-for="CreateModel.SupplierId" class="form-control" asp-items="@Model.Suppliers">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CreateModel.SupplierId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreateModel.CategoryId"></label>
-                <select asp-for="CreateModel.CategoryId" class="form-control" asp-items="@Model.Categories"></select>
-                <span asp-validation-for="CreateModel.CategoryId"></span>
+                <select asp-for="CreateModel.CategoryId" class="form-control" asp-items="@Model.Categories">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CreateModel.CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreateModel.QuantityPerUnit"></label>

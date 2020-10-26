@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Northwind.Web.Models.Products;
 
-namespace Northwind.Web.ViewModels
+namespace Northwind.Web.ViewModels.Products
 {
     public class ProductsViewModel
     {
