@@ -19,9 +19,11 @@ namespace Northwind.Web.Configuration
 
         public IConfigurationSection GetSection(string key)
         {
-            _logger.LogInformation($"Read section: '{key}'");
+            var section = _configuration.GetSection(key);
 
-            return _configuration.GetSection(key);
+            _logger.LogInformation($"Read section '{section.Path}' -> '{section.Value}'");
+
+            return section;
         }
 
         public IEnumerable<IConfigurationSection> GetChildren()
@@ -38,9 +40,11 @@ namespace Northwind.Web.Configuration
         {
             get
             {
-                _logger.LogInformation($"Read config key: '{key}'");
+                var value = _configuration[key];
 
-                return _configuration[key];
+                _logger.LogInformation($"Read config key '{key}' -> {value}");
+
+                return value;
             }
             set => _configuration[key] = value;
         }
