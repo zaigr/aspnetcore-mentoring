@@ -9,6 +9,8 @@ namespace Northwind.Web.ViewModels.Products
 
         public string ProductName { get; set; }
 
+        public SelectList Suppliers { get; set; }
+
         public SelectList Categories { get; set; }
 
         public ProductEditModel EditModel { get; set; }

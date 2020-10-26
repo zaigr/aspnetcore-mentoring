@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Core.UseCases.Products.Create;
@@ -12,8 +11,8 @@ using Northwind.Core.UseCases.Products.GetSingle;
 using Northwind.Core.UseCases.Products.Update;
 using Northwind.Core.UseCases.Suppliers.GetAll;
 using Northwind.Domain.Models;
+using Northwind.Web.Extensions;
 using Northwind.Web.Models.Products;
-using Northwind.Web.ViewModels;
 using Northwind.Web.ViewModels.Products;
 
 namespace Northwind.Web.Controllers
@@ -43,8 +42,8 @@ namespace Northwind.Web.Controllers
             };
             var products = await _mediator.Send(query);
 
-            var productItems = _mapper.Map<IList<ProductItemModel>>(products);
-            var viewModel = new ProductsViewModel
+            var productItems = _mapper.Map<IList<ProductTableItemModel>>(products);
+            var viewModel = new ProductsTableViewModel
             {
                 ProductItemModels = productItems,
             };
@@ -64,15 +63,15 @@ namespace Northwind.Web.Controllers
             var product = await _mediator.Send(query);
 
             var categories = await _mediator.Send(new GetAllCategoriesQuery());
-
+            var suppliers = await _mediator.Send(new GetAllSuppliersQuery());
             var editProductModel = _mapper.Map<ProductEditModel>(product);
-            var categorySelectList = new SelectList(categories, nameof(Category.CategoryId), nameof(Category.CategoryName), product.Category.CategoryName);
 
             var viewModel = new EditProductViewModel
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
-                Categories = categorySelectList,
+                Categories = categories.ToSelectList(nameof(Category.CategoryId), nameof(Category.CategoryName)),
+                Suppliers = suppliers.ToSelectList(nameof(Supplier.SupplierId), nameof(Supplier.CompanyName)),
                 EditModel = editProductModel,
             };
 
@@ -97,16 +96,12 @@ namespace Northwind.Web.Controllers
         public async Task<IActionResult> Create()
         {
             var categories = await _mediator.Send(new GetAllCategoriesQuery());
-            var categorySelectList = new SelectList(categories, nameof(Category.CategoryId), nameof(Category.CategoryName));
-
             var suppliers = await _mediator.Send(new GetAllSuppliersQuery());
-            var suppliersSelectList = new SelectList(suppliers, nameof(Supplier.SupplierId), nameof(Supplier.CompanyName));
 
             var viewModel = new CreateProductViewModel
             {
-                Categories = categorySelectList,
-                Suppliers = suppliersSelectList,
-                CreateModel = new ProductCreateModel(),
+                Categories = categories.ToSelectList(nameof(Category.CategoryId), nameof(Category.CategoryName)),
+                Suppliers = suppliers.ToSelectList(nameof(Supplier.SupplierId), nameof(Supplier.CompanyName)),
             };
 
             return View(viewModel);

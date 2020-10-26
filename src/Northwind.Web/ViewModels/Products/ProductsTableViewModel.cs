@@ -3,8 +3,8 @@ using Northwind.Web.Models.Products;
 
 namespace Northwind.Web.ViewModels.Products
 {
-    public class ProductsViewModel
+    public class ProductsTableViewModel
     {
-        public IList<ProductItemModel> ProductItemModels { get; set; }
+        public IList<ProductTableItemModel> ProductItemModels { get; set; }
     }
 }

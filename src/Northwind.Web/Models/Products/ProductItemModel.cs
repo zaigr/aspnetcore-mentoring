@@ -2,7 +2,7 @@
 
 namespace Northwind.Web.Models.Products
 {
-    public class ProductItemModel
+    public class ProductTableItemModel
     {
         [DisplayName("Id")]
         public int ProductId { get; set; }

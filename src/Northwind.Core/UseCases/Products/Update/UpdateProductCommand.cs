@@ -14,7 +14,7 @@ namespace Northwind.Core.UseCases.Products.Update
 
         public short? UnitsInStock { get; set; }
 
-        public short? UnitsInOrder { get; set; }
+        public short? UnitsOnOrder { get; set; }
 
         public short? ReorderLevel { get; set; }
 

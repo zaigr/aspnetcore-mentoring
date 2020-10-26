@@ -20,9 +20,19 @@
                 <span asp-validation-for="EditModel.ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="EditModel.SupplierId"></label>
+                <select asp-for="EditModel.SupplierId" class="form-control" asp-items="@Model.Suppliers"></select>
+                <span asp-validation-for="EditModel.SupplierId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="EditModel.CategoryId"></label>
                 <select asp-for="EditModel.CategoryId" class="form-control" asp-items="@Model.Categories"></select>
                 <span asp-validation-for="EditModel.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditModel.QuantityPerUnit"></label>
+                <input asp-for="EditModel.QuantityPerUnit" class="form-control" value="@Model.EditModel.QuantityPerUnit" />
+                <span asp-validation-for="EditModel.QuantityPerUnit" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EditModel.UnitPrice"></label>
@@ -35,9 +45,9 @@
                 <span asp-validation-for="EditModel.UnitsInStock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EditModel.UnitsInOrder"></label>
-                <input asp-for="EditModel.UnitsInOrder" class="form-control" value="@Model.EditModel.UnitsInOrder" />
-                <span asp-validation-for="EditModel.UnitsInOrder" class="text-danger"></span>
+                <label asp-for="EditModel.UnitsOnOrder"></label>
+                <input asp-for="EditModel.UnitsOnOrder" class="form-control" value="@Model.EditModel.UnitsOnOrder" />
+                <span asp-validation-for="EditModel.UnitsOnOrder" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EditModel.ReorderLevel"></label>

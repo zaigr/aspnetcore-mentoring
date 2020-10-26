@@ -14,7 +14,7 @@ namespace Northwind.Web.Mapping
             CreateMap<Category, CategoryItemModel>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(s => s.CategoryName));
 
-            CreateMap<Product, ProductItemModel>()
+            CreateMap<Product, ProductTableItemModel>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(s => s.ProductName))
                 .ForMember(d => d.SupplierName, opt => opt.MapFrom(s => s.Supplier.CompanyName))
                 .ForMember(d => d.CategoryName, opt => opt.MapFrom(s => s.Category.CategoryName));
