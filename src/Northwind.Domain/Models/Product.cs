@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Northwind.Domain.Models
+﻿namespace Northwind.Domain.Models
 {
-    public partial class Product
+    public class Product
     {
-        public Product()
-        {
-            OrderDetails = new HashSet<OrderDetails>();
-        }
-
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public int? SupplierId { get; set; }
@@ -23,6 +15,5 @@ namespace Northwind.Domain.Models
 
         public virtual Category Category { get; set; }
         public virtual Supplier Supplier { get; set; }
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

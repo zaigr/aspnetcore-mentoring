@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Northwind.Domain.Models
 {
-    public partial class Supplier
+    public class Supplier
     {
         public Supplier()
         {
