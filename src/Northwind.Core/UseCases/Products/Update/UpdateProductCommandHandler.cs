@@ -34,10 +34,10 @@ namespace Northwind.Core.UseCases.Products.Update
 
         private void UpdateProduct(Product product, UpdateProductCommand request)
         {
-            product.ProductName = request.ProductName;
             product.CategoryId = request.CategoryId;
             product.Discontinued = request.Discontinued;
 
+            product.ProductName = request.ProductName ?? product.ProductName;
             product.UnitPrice = request.UnitPrice ?? product.UnitPrice;
             product.UnitsInStock = request.UnitsInStock ?? product.UnitsInStock;
             product.UnitsOnOrder = request.UnitsOnOrder ?? product.UnitsOnOrder;

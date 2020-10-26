@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Northwind.Data;
 using Northwind.Domain.Models;
+// ReSharper disable MethodHasAsyncOverloadWithCancellation
 
 namespace Northwind.Core.UseCases.Products.Create
 {
