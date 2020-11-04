@@ -4,6 +4,8 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Core.UseCases.Categories.GetAll;
+using Northwind.Core.UseCases.Categories.GetImage;
+using Northwind.Web.Const;
 using Northwind.Web.Models.Categories;
 using Northwind.Web.ViewModels.Categories;
 
@@ -34,6 +36,16 @@ namespace Northwind.Web.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Image(int id)
+        {
+            var query = new GetCategoryImageQuery(id);
+
+            var result = await _mediator.Send(query);
+
+            return File(result, ContentTypes.BmpImage);
         }
     }
 }

@@ -18,6 +18,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.CategoryItemModels[0].Description)
             </th>
+            <th>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +34,9 @@
                 </td>
                 <td>
                     @item.Description
+                </td>
+                <td>
+                    <a asp-action="Image" asp-route-id="@item.CategoryId">Image</a>
                 </td>
             </tr>
         }
