@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Data;
 using Northwind.Web.Configuration;
+using Northwind.Web.Filters;
 using Northwind.Web.Mapping;
 using Serilog;
 
@@ -46,6 +47,10 @@ namespace Northwind.Web
             services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
             services.Configure<ProductsOptions>(Configuration.GetSection(ProductsOptions.Products));
+            services.Configure<CategoriesOptions>(Configuration.GetSection(CategoriesOptions.Categories));
+            services.Configure<ActionLoggingOptions>(Configuration.GetSection(ActionLoggingOptions.ActionLogging));
+
+            services.AddScoped<ActionLoggingFilter>();
 
             services.Decorate<IConfiguration, ConfigurationLogger>();
         }

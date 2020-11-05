@@ -20,6 +20,8 @@
             </th>
             <th>
             </th>
+            <th>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,6 +39,9 @@
                 </td>
                 <td>
                     <a asp-action="Image" asp-route-id="@item.CategoryId">Image</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a>
                 </td>
             </tr>
         }

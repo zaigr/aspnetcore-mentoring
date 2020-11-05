@@ -1,0 +1,36 @@
+﻿@model Northwind.Web.ViewModels.Categories.UploadCategoryImageViewModel
+
+@{
+    ViewData["Title"] = "Category Image";
+}
+
+<h1>@Model.CategoryName</h1>
+
+<h4>Change category image</h4>
+
+<img src="@Url.Action("Image", new { id = Model.CategoryId })" />
+
+<form asp-action="UploadImage" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="CategoryId" />
+    <input type="hidden" asp-for="CategoryName" />
+    <input type="hidden" asp-for="AllowedFileExtension" />
+    <input type="hidden" asp-for="FileSizeLimitMb" />
+
+    <dl>
+        <dt>
+            File size limit: @Model.FileSizeLimitMb Mb.
+        </dt>
+        <dt>
+            Allowed file extension: @Model.AllowedFileExtension
+        </dt>
+        <dd>
+            <input asp-for="File" type="file" />
+            <span asp-validation-for="File" class="text-danger"></span>
+        </dd>
+    </dl>
+    <input asp-action="UploadImage" class="btn btn-primary" type="submit" value="Upload" />
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
