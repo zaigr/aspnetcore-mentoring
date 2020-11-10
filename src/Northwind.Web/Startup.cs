@@ -12,6 +12,7 @@ using Northwind.Data;
 using Northwind.Web.Configuration;
 using Northwind.Web.Filters;
 using Northwind.Web.Mapping;
+using Northwind.Web.Middleware;
 using Serilog;
 
 namespace Northwind.Web
@@ -49,6 +50,7 @@ namespace Northwind.Web
             services.Configure<ProductsOptions>(Configuration.GetSection(ProductsOptions.Products));
             services.Configure<CategoriesOptions>(Configuration.GetSection(CategoriesOptions.Categories));
             services.Configure<ActionLoggingOptions>(Configuration.GetSection(ActionLoggingOptions.ActionLogging));
+            services.Configure<ImageCachingOptions>(Configuration.GetSection(ImageCachingOptions.ImageCaching));
 
             services.AddScoped<ActionLoggingFilter>();
 
@@ -75,6 +77,10 @@ namespace Northwind.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseMiddleware<ImageCachingMiddleware>();
+
+            app.UseMiddleware<ResponseBufferingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
