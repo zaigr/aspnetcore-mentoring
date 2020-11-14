@@ -4,6 +4,8 @@
     ViewData["Title"] = "Category Image";
 }
 
+@await Component.InvokeAsync("Breadcrumb")
+
 <h1>@Model.CategoryName</h1>
 
 <h4>Change category image</h4>

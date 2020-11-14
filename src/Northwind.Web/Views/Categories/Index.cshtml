@@ -4,6 +4,8 @@
     ViewData["Title"] = "Categories";
 }
 
+@await Component.InvokeAsync("Breadcrumb")
+
 <h1>Categories table</h1>
 
 <table class="table">
@@ -47,3 +49,8 @@
         }
     </tbody>
 </table>
+
+@section Footers
+{
+    <p class="text-warning">Note: only category images are editable</p>
+}
