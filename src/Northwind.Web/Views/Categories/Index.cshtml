@@ -40,7 +40,8 @@
                     @item.Description
                 </td>
                 <td>
-                    <a asp-action="Image" asp-route-id="@item.CategoryId">Image</a>
+                    @Html.NorthwindImageLink(item.CategoryId, "Image")
+                    <!-- <a northwind-id="@item.CategoryId">Image</a> -->
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a>
