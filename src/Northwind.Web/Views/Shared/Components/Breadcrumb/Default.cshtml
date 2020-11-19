@@ -1,0 +1,27 @@
+﻿<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-light">
+    </ol>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+        // sections are not supported for view components
+        // execute code after jQuery is loaded
+        var breadcrumb = $(".breadcrumb");
+        if (breadcrumb) {
+            breadcrumb.append(`<li class="breadcrumb-item"><a href="${window.location.origin}">Home</a></li>`);
+
+            var parts = window.location.pathname.split("/");
+
+            var pathLink = window.location.origin;
+            parts.forEach((part, index) => {
+                if (part.length > 0) {
+                    pathLink += `/${part}`;
+
+                    var isActive = index === (parts.length - 1);
+                    breadcrumb.append(`<li class="breadcrumb-item ${isActive ? "active" : ""}" ${isActive ? 'aria-current="page"' : ''}><a href="${pathLink}">${part}</a></li>`);
+                }
+            });
+        }
+    });
+</script>

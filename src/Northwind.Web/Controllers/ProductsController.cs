@@ -57,7 +57,7 @@ namespace Northwind.Web.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
 
             var query = new GetSingleProductQuery(id.Value);

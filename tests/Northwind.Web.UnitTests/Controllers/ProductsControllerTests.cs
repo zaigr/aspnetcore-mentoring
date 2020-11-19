@@ -190,7 +190,9 @@ namespace Northwind.Web.UnitTests.Controllers
             var result = await controller.Edit(id: null);
 
             // Assert
-            Assert.IsType<NotFoundResult>(result);
+            var redirect = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirect.ControllerName);
+            Assert.Equal("Index", redirect.ActionName);
         }
 
         [Fact]

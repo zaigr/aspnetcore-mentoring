@@ -4,6 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
+@await Component.InvokeAsync("Breadcrumb")
+
 <h1>Edit</h1>
 
 <h4>@Model.ProductId - @Model.ProductName</h4>

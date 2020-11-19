@@ -63,9 +63,14 @@ namespace Northwind.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var query = new GetSingleCategoryQuery(id);
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var query = new GetSingleCategoryQuery(id.Value);
             var category = await _mediator.Send(query);
 
             var viewModel = new UploadCategoryImageViewModel

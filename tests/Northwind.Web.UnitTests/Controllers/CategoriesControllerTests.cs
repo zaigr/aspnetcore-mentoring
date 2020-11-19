@@ -6,9 +6,11 @@ using AutoFixture;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Moq;
 using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Domain.Models;
+using Northwind.Web.Configuration;
 using Northwind.Web.Controllers;
 using Northwind.Web.Mapping;
 using Northwind.Web.ViewModels.Categories;
@@ -21,6 +23,8 @@ namespace Northwind.Web.UnitTests.Controllers
         private readonly IMapper _mapper = SetupMapper();
 
         private readonly Mock<IMediator> _mediatorMock;
+
+        private readonly CategoriesOptions _options = new CategoriesOptions();
 
         public CategoriesControllerTests()
         {
@@ -48,7 +52,11 @@ namespace Northwind.Web.UnitTests.Controllers
 
         private CategoriesController Subject()
         {
-            return new CategoriesController(_mediatorMock.Object, _mapper);
+            var optionsMock = new Mock<IOptions<CategoriesOptions>>();
+            optionsMock
+                .Setup(s => s.Value).Returns(_options);
+
+            return new CategoriesController(_mediatorMock.Object, _mapper, optionsMock.Object);
         }
 
         [Fact]
