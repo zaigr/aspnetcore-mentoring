@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Path = System.IO.Path;
 
-namespace Northwind.Web.Utilities
+namespace Northwind.Web.Common.Utilities
 {
     public static class FormFileHelper
     {

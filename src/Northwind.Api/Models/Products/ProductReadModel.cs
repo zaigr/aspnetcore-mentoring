@@ -25,11 +25,11 @@ namespace Northwind.Api.Models.Products
         [JsonPropertyName("units_in_stock")]
         public int UnitsInStock { get; set; }
 
-        [JsonPropertyName("units_in_order")]
-        public int UnitsInOrder { get; set; }
+        [JsonPropertyName("units_on_order")]
+        public int UnitsOnOrder { get; set; }
 
-        [JsonPropertyName("recorder_level")]
-        public int RecorderLevel { get; set; }
+        [JsonPropertyName("reorder_level")]
+        public int ReorderLevel { get; set; }
 
         [JsonPropertyName("discontinued")]
         public bool Discontinued { get; set; }

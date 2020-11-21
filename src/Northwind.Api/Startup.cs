@@ -1,12 +1,13 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Northwind.Api.Config;
+using Northwind.Api.Exceptions.Handlers;
 using Northwind.Api.Mapping;
+using Northwind.Api.Middleware;
 using Northwind.Core.UseCases.Products.GetAll;
 using Northwind.Data;
 
@@ -24,8 +25,11 @@ namespace Northwind.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR(typeof(GetAllProductsQuery).Assembly);
-
             services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+            services.Configure<ImageFileOptions>(Configuration.GetSection(ImageFileOptions.ImageFile));
+
+            services.AddTransient<IExceptionHandler, EntityNotFoundExceptionHandler>();
 
             services.AddDbContext<NorthwindContext>(opt =>
             {
@@ -35,12 +39,9 @@ namespace Northwind.Api
             services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseRouting();
 

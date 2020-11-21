@@ -35,13 +35,13 @@ namespace Northwind.Core.UseCases.Products.Update
         private void UpdateProduct(Product product, UpdateProductCommand request)
         {
             product.CategoryId = request.CategoryId;
+            product.SupplierId = request.SupplierId;
+            product.ProductName = request.ProductName;
+            product.UnitPrice = request.UnitPrice;
+            product.UnitsInStock = request.UnitsInStock;
+            product.UnitsOnOrder = request.UnitsOnOrder;
+            product.ReorderLevel = request.ReorderLevel;
             product.Discontinued = request.Discontinued;
-
-            product.ProductName = request.ProductName ?? product.ProductName;
-            product.UnitPrice = request.UnitPrice ?? product.UnitPrice;
-            product.UnitsInStock = request.UnitsInStock ?? product.UnitsInStock;
-            product.UnitsOnOrder = request.UnitsOnOrder ?? product.UnitsOnOrder;
-            product.ReorderLevel = request.ReorderLevel ?? product.ReorderLevel;
         }
     }
 }
