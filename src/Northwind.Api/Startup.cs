@@ -1,9 +1,13 @@
+using System;
+using System.IO;
+using System.Reflection;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Northwind.Api.Config;
 using Northwind.Api.Exceptions.Handlers;
 using Northwind.Api.Mapping;
@@ -37,10 +41,31 @@ namespace Northwind.Api
             });
 
             services.AddControllers();
+            services.AddRouting(c => c.LowercaseUrls = true);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Northwind API",
+                    Description = "REST API used to manage Northwind products.",
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Northwind API");
+            });
+
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseRouting();

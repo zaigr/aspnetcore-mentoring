@@ -33,6 +33,10 @@ namespace Northwind.Api.Controllers
             _imageFileOptions = options.Value;
         }
 
+        /// <summary>
+        /// Returns full list of product categories.
+        /// </summary>
+        /// <response code="200" />
         [HttpGet]
         public async Task<IList<CategoryReadModel>> GetAll()
         {
@@ -41,6 +45,12 @@ namespace Northwind.Api.Controllers
             return _mapper.Map<IList<CategoryReadModel>>(queryResult);
         }
 
+        /// <summary>
+        /// Returns product category image.
+        /// </summary>
+        /// <param name="id">ID of product category.</param>
+        /// <response code="200" />
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{id}/image")]
         public async Task<FileStreamResult> GetImage(int id)
         {
@@ -51,6 +61,15 @@ namespace Northwind.Api.Controllers
             return File(result, ContentTypes.BmpImage);
         }
 
+        /// <summary>
+        /// Updates product category image.
+        /// </summary>
+        /// <param name="id">ID of product category.</param>s
+        /// <param name="file"></param>
+        /// <response code="204" />
+        /// <response code="400" >Returns list of validation errors.</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("{id}/image")]
         public async Task<IActionResult> UpdateImage(int id, IFormFile file)
         {

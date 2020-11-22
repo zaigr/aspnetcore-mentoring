@@ -2,8 +2,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Api.Models.Products;
+using Northwind.Api.Models.Response;
 using Northwind.Core.UseCases.Products.Create;
 using Northwind.Core.UseCases.Products.Delete;
 using Northwind.Core.UseCases.Products.GetAll;
@@ -25,6 +27,10 @@ namespace Northwind.Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Returns full list of products.
+        /// </summary>
+        /// <response code="200" />
         [HttpGet]
         public async Task<IList<ProductReadModel>> GetAll()
         {
@@ -33,16 +39,35 @@ namespace Northwind.Api.Controllers
             return _mapper.Map<IList<ProductReadModel>>(result);
         }
 
+        /// <summary>
+        /// Creates new product.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <response code="200" >Returns id of newly created product </response>
+        /// <response code="400" >Returns list of validation errors.</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]ProductCreateModel model)
+        public async Task<ObjectIdResponse> Create([FromBody]ProductCreateModel model)
         {
             var command = _mapper.Map<CreateProductCommand>(model);
 
             var result = await _mediator.Send(command);
 
-            return Ok(new { id = result });
+            return new ObjectIdResponse(result);
         }
 
+        /// <summary>
+        /// Update whole product entry.
+        /// </summary>
+        /// <param name="id">ID of product.</param>
+        /// <param name="model"></param>
+        /// <response code="204" >Product updated successfully.</response>
+        /// <response code="400" >Returns list of validation errors.</response>
+        /// <response code="404" >Product with provided ID not found.</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit(int id, [FromBody]ProductCreateModel model)
         {
@@ -55,6 +80,14 @@ namespace Northwind.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Removes product entry.
+        /// </summary>
+        /// <param name="id">ID of product.</param>
+        /// <response code="204" >Product updated successfully.</response>
+        /// <response code="404" >Product with provided ID not found.</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
