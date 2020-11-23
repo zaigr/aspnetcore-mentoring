@@ -56,6 +56,15 @@ namespace Northwind.Api
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins(Configuration.GetSection("AllowedOrigins").Get<string[]>());
+                    });
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -69,6 +78,8 @@ namespace Northwind.Api
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
