@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Northwind.Core.UseCases.Categories.GetAll;
@@ -17,6 +18,7 @@ using Northwind.Web.ViewModels.Categories;
 
 namespace Northwind.Web.Controllers
 {
+    [Authorize]
     [ServiceFilter(typeof(ActionLoggingFilter))]
     public class CategoriesController : Controller
     {

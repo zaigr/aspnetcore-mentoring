@@ -51,6 +51,7 @@ namespace Northwind.Web
             services.Configure<CategoriesOptions>(Configuration.GetSection(CategoriesOptions.Categories));
             services.Configure<ActionLoggingOptions>(Configuration.GetSection(ActionLoggingOptions.ActionLogging));
             services.Configure<ImageCachingOptions>(Configuration.GetSection(ImageCachingOptions.ImageCaching));
+            services.Configure<SendGridOptions>(Configuration.GetSection(SendGridOptions.SendGrid));
 
             services.AddScoped<ActionLoggingFilter>();
 
@@ -72,14 +73,18 @@ namespace Northwind.Web
                 logger.LogInformation("Not Development.");
 
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseMiddleware<ImageCachingMiddleware>();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
+            app.UseMiddleware<ImageCachingMiddleware>();
             app.UseMiddleware<ResponseBufferingMiddleware>();
 
             app.UseEndpoints(endpoints =>
@@ -92,6 +97,8 @@ namespace Northwind.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
 
             logger.LogInformation("Middleware configuration finished.");

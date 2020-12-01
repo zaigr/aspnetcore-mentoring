@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Northwind.Core.UseCases.Categories.GetAll;
@@ -18,6 +19,7 @@ using Northwind.Web.ViewModels.Products;
 
 namespace Northwind.Web.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IMediator _mediator;
