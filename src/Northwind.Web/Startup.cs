@@ -51,7 +51,6 @@ namespace Northwind.Web
             services.Configure<CategoriesOptions>(Configuration.GetSection(CategoriesOptions.Categories));
             services.Configure<ActionLoggingOptions>(Configuration.GetSection(ActionLoggingOptions.ActionLogging));
             services.Configure<ImageCachingOptions>(Configuration.GetSection(ImageCachingOptions.ImageCaching));
-            services.Configure<SendGridOptions>(Configuration.GetSection(SendGridOptions.SendGrid));
 
             services.AddScoped<ActionLoggingFilter>();
 
