@@ -84,6 +84,8 @@ namespace Northwind.Web.Areas.Identity.Controllers
 
                     await SendConfirmationEmailAsync(user);
 
+                    await _signInManager.SignOutAsync();
+
                     return RedirectToPage("/Account/RegisterConfirmation", new { area = "Identity", Email = user.Email });
                 }
             }
@@ -111,7 +113,15 @@ namespace Northwind.Web.Areas.Identity.Controllers
             await _userStore.SetUserNameAsync(user, email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, email, CancellationToken.None);
 
-            return await _userManager.CreateAsync(user);
+            var result = await _userManager.CreateAsync(user);
+
+            var role = externalInfo.GetUserRole();
+            if (role != null)
+            {
+                await _userManager.AddToRoleAsync(user, role);
+            }
+
+            return result;
         }
 
         private async Task SendConfirmationEmailAsync(IdentityUser user)
