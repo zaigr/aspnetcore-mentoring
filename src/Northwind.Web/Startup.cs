@@ -72,14 +72,18 @@ namespace Northwind.Web
                 logger.LogInformation("Not Development.");
 
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseMiddleware<ImageCachingMiddleware>();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
+            app.UseMiddleware<ImageCachingMiddleware>();
             app.UseMiddleware<ResponseBufferingMiddleware>();
 
             app.UseEndpoints(endpoints =>
@@ -92,6 +96,8 @@ namespace Northwind.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
 
             logger.LogInformation("Middleware configuration finished.");
