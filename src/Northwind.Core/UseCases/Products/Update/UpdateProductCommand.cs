@@ -10,6 +10,8 @@ namespace Northwind.Core.UseCases.Products.Update
 
         public int CategoryId { get; set; }
 
+        public int SupplierId { get; set; }
+
         public decimal? UnitPrice { get; set; }
 
         public short? UnitsInStock { get; set; }

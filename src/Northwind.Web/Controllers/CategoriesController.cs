@@ -8,11 +8,11 @@ using Northwind.Core.UseCases.Categories.GetAll;
 using Northwind.Core.UseCases.Categories.GetImage;
 using Northwind.Core.UseCases.Categories.GetSingle;
 using Northwind.Core.UseCases.Categories.UpdateImage;
+using Northwind.Web.Common.Const;
+using Northwind.Web.Common.Utilities;
 using Northwind.Web.Configuration;
-using Northwind.Web.Const;
 using Northwind.Web.Filters;
 using Northwind.Web.Models.Categories;
-using Northwind.Web.Utilities;
 using Northwind.Web.ViewModels.Categories;
 
 namespace Northwind.Web.Controllers

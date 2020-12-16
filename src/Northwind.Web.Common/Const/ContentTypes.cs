@@ -1,4 +1,4 @@
-﻿namespace Northwind.Web.Const
+﻿namespace Northwind.Web.Common.Const
 {
     public static class ContentTypes
     {
