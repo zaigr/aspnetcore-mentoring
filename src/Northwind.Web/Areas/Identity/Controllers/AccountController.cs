@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.WebUtilities;
 using Northwind.Web.Areas.Identity.Utils.Extensions;
 
@@ -90,11 +91,36 @@ namespace Northwind.Web.Areas.Identity.Controllers
                 }
             }
 
+            await UpdateUserRoleAsync(externalUser, externalInfo);
+
             await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
 
             await _signInManager.SignInAsync(externalUser, isPersistent: true);
 
             return Redirect(returnUrl ?? Url.Action("Index", "Home"));
+        }
+
+        private async Task UpdateUserRoleAsync(IdentityUser externalUser, ExternalLoginInfo externalInfo)
+        {
+            var roles = await _userManager.GetRolesAsync(externalUser);
+            if (roles.Count > 1)
+            {
+                throw new InvalidOperationException("Application support only single role assigned per user.");
+            }
+
+            var currentRole = roles.SingleOrDefault();
+            var externalRole = externalInfo.GetUserRole();
+
+            var isRoleChanged = currentRole != externalRole;
+            if (isRoleChanged && currentRole != null)
+            {
+                await _userManager.RemoveFromRoleAsync(externalUser, currentRole);
+            }
+
+            if (isRoleChanged && externalRole != null)
+            {
+                await _userManager.AddToRoleAsync(externalUser, externalRole);
+            }
         }
 
         private IUserEmailStore<IdentityUser> GetEmailStore()
