@@ -38,6 +38,9 @@ namespace Northwind.Web
 
             services.AddControllersWithViews();
 
+            services.AddRazorPages()
+                .AddRazorRuntimeCompilation();
+
             services.AddDbContext<NorthwindContext>(opt =>
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("Northwind"));

@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
+    <UserSecretsId>5c82c900-007f-4c55-901c-038802f1511a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/usc-northwind-sql-serv/databases/Northwind",
+      "type": "mssql.azure",
+      "connectionId": "Northwind",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
